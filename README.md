@@ -30,14 +30,18 @@
 
 ### Incidente
 - ID del incidente
-- Descripción del problema
-- Tipo del problema (relación a tabla de Tipos de Problema)
 - Fecha de reporte
 - Fecha posible de resolución
 - Estado del incidente (Abierto, Resuelto)
 - Colchón de horas estimadas
 - Técnico asignado (relación a tabla de Técnicos)
 - Cliente (relación a tabla de Clientes)
+
+### Detalle de Incidente
+- ID del detalle de incidente
+- Descripción detallada del problema
+- Tipo del problema (relación a tabla de Tipos de Problema)
+- Incidente relacionado (relación a tabla de Incidentes)
 
 ### Servicio
 - ID del servicio
@@ -66,11 +70,20 @@
 - Técnico tiene Especialidades (relación muchos a muchos)
 - Técnico tiene Notificaciones (relación uno a muchos)
 - Incidente es asignado a un Técnico (relación uno a uno)
+- Incidente tiene Detalles de Incidente (relación uno a muchos)
 - Incidente está relacionado con un Tipo de Problema (relación uno a uno)
 
-## Falta revision 
-- controlar entidades 1 faltante 
+
+## Correciones 
+- controlar entidades se agrego `Detalle de Incidente`
 - relacion incidente y tipo de problema
 
+| posibles tablas |
+|----------|
+ | Área de RRHH |
+ | Área Comercial |
+ | Reporte |
+ | Problema |
+ | Estadísticas |
 
 ![DER](./uml.png)
