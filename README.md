@@ -68,5 +68,8 @@
 - Incidente es asignado a un Técnico (relación uno a uno)
 - Incidente está relacionado con un Tipo de Problema (relación uno a uno)
 
+##falta revision 
+controlar entidades faltante y relacion incidente y tipo de problema
+
 
 ![DER](./uml.png)
