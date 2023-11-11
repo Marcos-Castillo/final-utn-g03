@@ -1,6 +1,5 @@
 @startuml
-
-!define ENTITY class
+!define ENTITY entity
 !define RELATION association
 
 ENTITY Cliente {
@@ -11,113 +10,9 @@ ENTITY Cliente {
     - Teléfono
     - Email
 }
-@startuml
-
-!define ENTITY class
-!define RELATION association
-
-package "Entidades" {
-    ENTITY Cliente {
-        - ID del cliente
-        - Razón social
-        - CUIT
-        - Contacto principal
-        - Teléfono
-        - Email
-    }
-
-    ENTITY Operador {
-        - ID del operador
-        - Nombre
-        - Apellido
-        - Teléfono
-        - Email
-        - Usuario
-        - Contraseña
-    }
-
-    ENTITY Técnico {
-        - ID del técnico
-        - Nombre
-        - Apellido
-        - Especialidades (relación a tabla de Especialidades)
-        - Medio de notificación preferido (Email, WhatsApp)
-        - Tiempo estimado de resolución por defecto
-    }
-
-    ENTITY Incidente {
-        - ID del incidente
-        - Fecha de reporte
-        - Fecha posible de resolución
-        - Estado del incidente (Abierto, Resuelto)
-        - Colchón de horas estimadas
-        - Técnico asignado (relación a tabla de Técnicos)
-        - Cliente (relación a tabla de Clientes)
-    }
-
-    ENTITY DetalleDeIncidente {
-        - ID del detalle de incidente
-        - Descripción detallada del problema
-        - Tipo del problema (relación a tabla de Tipos de Problema)
-        - Incidente relacionado (relación a tabla de Incidentes)
-    }
-
-    ENTITY Servicio {
-        - ID del servicio
-        - Nombre del servicio
-        - Descripción del servicio
-        - Especialidad
-    }
-
-    ENTITY Especialidad {
-        - ID de la especialidad
-        - Nombre de la especialidad
-    }
-
-    ENTITY TipoDeProblema {
-        - ID del tipo de problema
-        - Nombre del tipo de problema
-        - Tiempo máximo de resolución
-    }
-
-    ENTITY Notificación {
-        - ID de la notificación
-        - Contenido de la notificación
-        - Técnico destinatario (relación a tabla de Técnicos)
-        - Fecha de envío
-    }
-}
-
-package "Relaciones" {
-    RELATION "Cliente tiene Servicios contratados" {
-        Cliente } - "muchos a muchos" - Servicio
-    }
-
-    RELATION "Técnico tiene Especialidades" {
-        Técnico } - "muchos a muchos" - Especialidad
-    }
-
-    RELATION "Técnico tiene Notificaciones" {
-        Técnico } - "uno a muchos" - Notificación
-    }
-
-    RELATION "Incidente es asignado a un Técnico" {
-        Incidente } - "uno a uno" - Técnico
-    }
-
-    RELATION "Incidente tiene Detalles de Incidente" {
-        Incidente } - "uno a muchos" - DetalleDeIncidente
-    }
-
-    RELATION "Incidente está relacionado con un Tipo de Problema" {
-        Incidente } - "uno a uno" - TipoDeProblema
-    }
-}
-
-@enduml
 
 ENTITY Operador {
-    - ID del operador
+    - ID del operador<<Id>>
     - Nombre
     - Apellido
     - Teléfono
@@ -137,14 +32,19 @@ ENTITY Técnico {
 
 ENTITY Incidente {
     - ID del incidente
-    - Descripción del problema
-    - Tipo del problema (relación a tabla de Tipos de Problema)
     - Fecha de reporte
     - Fecha posible de resolución
     - Estado del incidente (Abierto, Resuelto)
     - Colchón de horas estimadas
     - Técnico asignado (relación a tabla de Técnicos)
     - Cliente (relación a tabla de Clientes)
+}
+
+ENTITY "Detalle de Incidente" {
+    - ID del detalle de incidente
+    - Descripción detallada del problema
+    - Tipo del problema (relación a tabla de Tipos de Problema)
+    - Incidente relacionado (relación a tabla de Incidentes)
 }
 
 ENTITY Servicio {
@@ -159,7 +59,7 @@ ENTITY Especialidad {
     - Nombre de la especialidad
 }
 
-ENTITY TipoDeProblema {
+ENTITY "Tipo de Problema" {
     - ID del tipo de problema
     - Nombre del tipo de problema
     - Tiempo máximo de resolución
@@ -172,11 +72,13 @@ ENTITY Notificación {
     - Fecha de envío
 }
 
-Cliente --|> Servicio : tiene
+Cliente --|> Servicio : contrata
+Cliente --|> Incidente : reporta
 Técnico --|> Especialidad : tiene
 Técnico --|> Notificación : tiene
+Cliente --|> Notificación : tiene
 Incidente --|> Técnico : es asignado a
-Incidente --|> TipoDeProblema : está relacionado con
-Incidente --|> Cliente : involucra a
-
+Incidente --|> "Detalle de Incidente" : tiene
+"Detalle de Incidente" --|> "Tipo de Problema" : tiene
+Operador --|> Incidente : registra
 @enduml

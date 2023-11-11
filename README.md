@@ -75,15 +75,15 @@
 
 
 ## Correciones 
-- controlar entidades se agrego `Detalle de Incidente`
+- controlar entidades se agrego `Detalle de Incidente` y `Notificaciones`
 - relacion incidente y tipo de problema
+estas son otras posibles etntidades me parece que no corresponden
+  Área de RRHH
+  Área Comercial
+  Reporte
+  Problema 
+  Estadísticas
 
-| posibles tablas |
-|----------|
- | Área de RRHH |
- | Área Comercial |
- | Reporte |
- | Problema |
- | Estadísticas |
+
 
 ![DER](./uml.png)
