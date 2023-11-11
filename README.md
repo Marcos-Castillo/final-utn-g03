@@ -1,4 +1,4 @@
-# final-utn-g06
+# final-utn-g03
 # Sistema de reporte de incidentes
 
 ## Entidades:
@@ -69,7 +69,8 @@
 - Incidente está relacionado con un Tipo de Problema (relación uno a uno)
 
 ##falta revision 
-controlar entidades faltante y relacion incidente y tipo de problema
+- controlar entidades 1 faltante 
+- relacion incidente y tipo de problema
 
 
 ![DER](./uml.png)
