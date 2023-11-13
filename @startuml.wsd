@@ -82,3 +82,5 @@ Incidente --|> "Detalle de Incidente" : tiene
 "Detalle de Incidente" --|> "Tipo de Problema" : tiene
 Operador --|> Incidente : registra
 @enduml
+
+https://plantuml.com/es/

@@ -37,7 +37,7 @@
 - Técnico asignado (relación a tabla de Técnicos)
 - Cliente (relación a tabla de Clientes)
 
-### Detalle de Incidente
+### Problema
 - ID del detalle de incidente
 - Descripción detallada del problema
 - Tipo del problema (relación a tabla de Tipos de Problema)
@@ -67,16 +67,18 @@
 ## Relaciones:
 
 - Cliente tiene Servicios contratados (relación muchos a muchos)
+- Cliente tiene Notificación tiene (relación uno a muchos)
+- Cliente reporta Incidentes tiene (relación uno a muchos)
 - Técnico tiene Especialidades (relación muchos a muchos)
 - Técnico tiene Notificaciones (relación uno a muchos)
 - Incidente es asignado a un Técnico (relación uno a uno)
-- Incidente tiene Detalles de Incidente (relación uno a muchos)
+- Incidente tiene Problema (relación uno a muchos)
 - Incidente está relacionado con un Tipo de Problema (relación uno a uno)
+- Operador registra Incidentes (relación uno a muchos)
 
 
 ## Correciones 
-- se agrego entidades `Detalle de Incidente` y `Notificaciones`
-- estas son otras posibles entidades me parece que no corresponden Área de RRHH, Área Comercial, Reporte, Estadísticas,
+- se agrego entidades `Problema` y `Notificaciones`
   
 
 ![DER](./uml.png)
