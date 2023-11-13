@@ -38,7 +38,7 @@
 - Cliente (relación a tabla de Clientes)
 
 ### Problema
-- ID del detalle de incidente
+- ID Problema
 - Descripción detallada del problema
 - Tipo del problema (relación a tabla de Tipos de Problema)
 - Incidente relacionado (relación a tabla de Incidentes)
