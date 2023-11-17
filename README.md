@@ -97,6 +97,7 @@
 
 ## Correciones 
 - se agrego entidades `Problema` y `Notificaciones`
-  
-
-![DER](./uml.png)
+## Diagrama Entidad y Relacion
+![DER](./uml-der.png)
+## Diagrama De Clases
+![Diagrama De Clases](./uml.png)
