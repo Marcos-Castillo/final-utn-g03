@@ -1,5 +1,15 @@
 # final-utn-g03
+
 # Sistema de reporte de incidentes
+
+#### Número de comisión: 008.
+#### Grupo: 03 y Grupo: 06.
+ #### Integrantes:
+- German Insaurralde
+- Claudio Castro
+- Marcos Ezequiel Castillo 
+- Anagelica del Valle Estaba Carrasquero
+
 
 ## Entidades:
 
@@ -10,6 +20,8 @@
 - Contacto principal
 - Teléfono
 - Email
+    + contratarServicio(servicio: Servicio)
+    + reportarIncidente(detalle: Problema): Incidente
 
 ### Operador (Mesa de Ayuda)
 - ID del operador
@@ -19,6 +31,7 @@
 - Email
 - Usuario
 - Contraseña
+    + registrarIncidente(incidente: Incidente)
 
 ### Técnico
 - ID del técnico
@@ -27,6 +40,8 @@
 - Especialidades (relación a tabla de Especialidades)
 - Medio de notificación preferido (Email, WhatsApp)
 - Tiempo estimado de resolución por defecto
+    + asignarIncidente(incidente: Incidente)
+    + resolverIncidente(incidente: Incidente)
 
 ### Incidente
 - ID del incidente
@@ -34,8 +49,11 @@
 - Fecha posible de resolución
 - Estado del incidente (Abierto, Resuelto)
 - Colchón de horas estimadas
-- Técnico asignado (relación a tabla de Técnicos)
-- Cliente (relación a tabla de Clientes)
+    - Técnico asignado (relación a tabla de Técnicos)
+    - Cliente (relación a tabla de Clientes)
+    - Problemas (relación a tabla de Problema)
+    + confirmarIncidente(): void
+    + notificarTécnico(): void
 
 ### Problema
 - ID Problema

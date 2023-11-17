@@ -3,6 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 import lombok.Data;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,21 +13,21 @@ public class Incidente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIncidente;
 
-    private String descripcionProblema;
-    private Date fechaReporte;
-    private Date fechaPosibleResolucion;
+    private String fechaReporte;
+    private String fechaPosibleResolucion;
     private String estadoIncidente;
     private int colchonHorasEstimadas;
 
     @ManyToOne
-    @JoinColumn(name = "id_tecnico")
-    private Tecnico tecnico;
+    private Tecnico tecnicoAsignado;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @OneToOne
-    @JoinColumn(name = "id_tipo_problema")
-    private TipoProblema tipoProblema;
+    @OneToMany(mappedBy = "incidente")
+    private List<Problema> problemas;
+
+    public void confirmarIncidente(){}
+    public void notificarTécnico(){}
 }

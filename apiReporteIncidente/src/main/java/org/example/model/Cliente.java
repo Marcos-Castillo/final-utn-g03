@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -26,5 +27,11 @@ public class Cliente {
     @JoinTable(name = "cliente_servicio",
             joinColumns = @JoinColumn(name = "id_cliente"),
             inverseJoinColumns = @JoinColumn(name = "id_servicio"))
-    private Set<Servicio> serviciosContratados;
+    private List<Servicio> serviciosContratados;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Incidente> incidentesReportados;
+
+    public void contratarServicio(){}
+    public void reportarIncidente(){}
 }

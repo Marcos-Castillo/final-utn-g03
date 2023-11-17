@@ -3,6 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,11 +22,15 @@ public class Tecnico {
     @JoinTable(name = "tecnico_especialidad",
             joinColumns = @JoinColumn(name = "id_tecnico"),
             inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
-    private Set<Especialidad> especialidades;
-
-    @OneToMany(mappedBy = "tecnico")
-    private Set<Notificacion> notificaciones;
+    private List<Especialidad> especialidades;
 
     private String medioNotificacionPreferido;
-    private int tiempoEstimadoResolucionPorDefecto;
+    private int tiempoEstimadoResolucion;
+
+    @OneToMany(mappedBy = "tecnico")
+    private List<Incidente> incidentesAsignados;
+
+    public void asignarIncidente(){}
+    public void resolverIncidente(){}
+
 }

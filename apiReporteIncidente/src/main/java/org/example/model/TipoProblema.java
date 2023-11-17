@@ -7,14 +7,10 @@ import lombok.Data;
 @Data
 @Entity
 public class TipoProblema {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTipoProblema;
+    private Long id;
 
     private String nombreTipoProblema;
     private int tiempoMaximoResolucion;
-
-    @OneToOne(mappedBy = "tipoProblema")
-    private Incidente incidente;
 }

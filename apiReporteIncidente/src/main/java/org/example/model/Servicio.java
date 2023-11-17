@@ -7,14 +7,13 @@ import java.util.Set;
 @Data
 @Entity
 public class Servicio {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idServicio;
+    private Long id;
 
     private String nombreServicio;
     private String descripcionServicio;
 
-    @ManyToMany(mappedBy = "serviciosContratados")
-    private Set<Cliente> clientes;
+    @ManyToOne
+    private Especialidad especialidad;
 }

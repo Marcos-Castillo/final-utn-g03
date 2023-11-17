@@ -3,6 +3,8 @@ package org.example.model;
 import javax.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Operador {
@@ -17,4 +19,8 @@ public class Operador {
     private String email;
     private String usuario;
     private String contrasena;
+    @OneToMany(mappedBy = "operador")
+    private List<Incidente> incidentesRegistrados;
+
+    public void registrarIncidente(){}
 }
