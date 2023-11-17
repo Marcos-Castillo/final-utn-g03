@@ -9,6 +9,7 @@
 - Claudio Castro
 - Marcos Ezequiel Castillo 
 - Anagelica del Valle Estaba Carrasquero
+- Cristian Danilo Muñoz Clavijo
 
 
 ## Entidades:
