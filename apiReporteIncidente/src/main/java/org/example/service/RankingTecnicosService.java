@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class RankingTecnicosService implements Serializable {
     private Long idRankingTecnicos;
 
     @OneToMany(mappedBy = "tecnicoResuelve")
-    private List<Incidente> incidentesResueltos;
+    private List<Incidente> incidentesResueltos = new ArrayList<>();
 
     public Tecnico obtenerTecnicoMasIncidentesResueltosUltimosDias(int dias) {
         return incidentesResueltos.stream()
@@ -34,7 +35,7 @@ public class RankingTecnicosService implements Serializable {
                 .entrySet().stream()
                 .max(Comparator.comparing(Map.Entry::getValue))
                 .map(Map.Entry::getKey)
-                .orElse(null);
+                .orElseGet(() -> crearNuevoTecnico("Técnico sin incidentes resueltos en los últimos " + dias + " días"));
     }
 
     public Tecnico obtenerTecnicoMasIncidentesEspecialidadUltimosDias(Especialidad especialidad, int dias) {
@@ -46,7 +47,7 @@ public class RankingTecnicosService implements Serializable {
                 .entrySet().stream()
                 .max(Comparator.comparing(Map.Entry::getValue))
                 .map(Map.Entry::getKey)
-                .orElse(null);
+                .orElseGet(() -> crearNuevoTecnico("Técnico sin incidentes resueltos en la especialidad " + especialidad.getNombreEspecialidad() + " en los últimos " + dias + " días"));
     }
 
     public Tecnico obtenerTecnicoMasRapido() {
@@ -54,6 +55,13 @@ public class RankingTecnicosService implements Serializable {
                 .filter(incidente -> incidente.getFechaResolucion() != null)
                 .min(Comparator.comparing(Incidente::getFechaResolucion))
                 .map(Incidente::getTecnicoResuelve)
-                .orElse(null);
+                .orElseGet(() -> crearNuevoTecnico("Técnico sin incidentes resueltos rápidos"));
+    }
+
+    private Tecnico crearNuevoTecnico(String nombre) {
+        return Tecnico.builder()
+                .nombre(nombre)
+                // Puedes inicializar otros campos según tus necesidades
+                .build();
     }
 }

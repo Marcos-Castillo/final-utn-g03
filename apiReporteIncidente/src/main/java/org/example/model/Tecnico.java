@@ -1,12 +1,12 @@
 package org.example.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.enterprise.inject.New;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +21,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Tecnico implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,17 +35,20 @@ public class Tecnico implements Serializable {
         @ManyToMany(mappedBy = "tecnicos")
         private List<Especialidad> especialidades;
 
+        @Builder.Default
         @OneToMany(mappedBy = "tecnicoAsignado")
-        private List<Incidente> incidentesAsignados;
+        private List<Incidente> incidentesAsignados= new ArrayList<>();
 
-        @OneToMany(mappedBy = "tecnicoResuelve")
-        private List<Incidente> incidentesResueltos;
+        @Builder.Default
+    @OneToMany(mappedBy = "tecnicoResuelve")
+        private List<Incidente> incidentesResueltos = new ArrayList<>();
 
-        @OneToMany(mappedBy = "tecnicoDestinatario")
+
+    @OneToMany(mappedBy = "tecnicoDestinatario")
         private List<Notificacion> notificaciones;
 
         private String medioDeNotificacion;
-        private boolean disponible;
+        private boolean disponible = true;
 
         public void asignarIncidente(Incidente incidente) {
                 if (disponible) {
@@ -64,5 +68,6 @@ public class Tecnico implements Serializable {
                         throw new IllegalArgumentException("El técnico no puede resolver un incidente que no le fue asignado.");
                 }
         }
+
 
 }
