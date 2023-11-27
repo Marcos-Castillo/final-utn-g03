@@ -102,3 +102,7 @@
 ![DER](./uml-der.png)
 ## Diagrama De Clases
 ![Diagrama De Clases](./uml.png)
+## Diagrama De Clases con correciones
+![Diagrama De Clases](./uml-2.png)
+## Diagrama Entidad y Relacion con correciones
+![DER](./uml-der-2.png)

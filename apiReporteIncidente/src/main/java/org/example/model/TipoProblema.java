@@ -1,16 +1,35 @@
 package org.example.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
-import lombok.Data;
+import java.io.Serializable;
+import java.util.List;
 
-
-@Data
+@Getter
+@Setter
 @Entity
-public class TipoProblema {
+public class TipoProblema implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long idTipoProblema;
     private String nombreTipoProblema;
-    private int tiempoMaximoResolucion;
+    private String tiempoMaximoResolucion;
+
+    @ManyToMany
+    @JoinTable(name = "tipo_problema_especialidad",
+            joinColumns = @JoinColumn(name = "id_tipo_problema"),
+            inverseJoinColumns = @JoinColumn(name = "id_especialidad"))
+    private List<Especialidad> especialidades;
+
+    @ManyToMany(mappedBy = "tiposProblema")
+    private List<Servicio> servicios;
+
+    @OneToMany(mappedBy = "tipoProblema")
+    private List<Problema> problemas;
+
+
 }

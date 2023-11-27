@@ -2,91 +2,131 @@
 !define ENTITY entity
 !define RELATION association
 
-class Cliente {
-    - ID del cliente
-    - Razón social
-    - CUIT
-    - Contacto principal
-    - Teléfono
-    - Email
-    + contratarServicio(servicio: Servicio)
-    + reportarIncidente(detalle: Problema): Incidente
+enum EstadoIncidente {
+  ABIERTO
+  RESUELTO
+  EN_PROCESO
+  CERRADO
 }
 
-class Operador {
-    - ID del operador<<Id>>
-    - Nombre
-    - Apellido
-    - Teléfono
-    - Email
-    - Usuario
-    - Contraseña
-    + registrarIncidente(incidente: Incidente)
+interface Persona{
+  - Nombre
+  - FechaNacimiento
+  - Apellido
+  - Teléfono **
+  - Email **
+}
+
+class Cliente {
+  - Double ID del cliente *
+  - String Razón social *
+  - String CUIT *
+  - List<Service> ServiciosContratados***
+  - List<Notificación> Notificaciones ***
+  - Contacto principal **
+
+  + contratarServicio(servicio: Servicio) **
+  + reportarIncidente(detalle: Problema): Incidente **
+}
+
+class TiempoEstimadoTipoProblema {
+  - TipoProblema
+  - tiempoEstimado(hs)
 }
 
 class Técnico {
-    - ID del técnico
-    - Nombre
-    - Apellido
-    - Especialidades (relación a tabla de Especialidades)
-    - Medio de notificación preferido (Email, WhatsApp)
-    - Tiempo estimado de resolución por defecto
-    + asignarIncidente(incidente: Incidente)
-    + resolverIncidente(incidente: Incidente)
+  - ID del técnico
+  - List<Especialidad> Especialidades (relación a tabla de Especialidades)
+  - List<Notificación> notificaciónes
+  - String MedioDeNotificacion
+  - boolean disponible
+  + asignarIncidente(incidente: Incidente): void
+  + resolverIncidente(incidente: Incidente): void
 }
 
 class Incidente {
-    - ID del incidente
-    - Fecha de reporte
-    - Fecha posible de resolución
-    - Estado del incidente (Abierto, Resuelto)
-    - Colchón de horas estimadas
-    - Técnico asignado (relación a tabla de Técnicos)
-    - Cliente (relación a tabla de Clientes)
-    - Problemas (relación a tabla de Problema)
-    + confirmarIncidente(): void
-    + notificarTécnico(): void
+  - ID del incidente
+  - Fecha de reporte
+  - Fecha de resolución
+  - Estado del incidente (Abierto, Resuelto)
+  - Técnico asignado (relación a tabla de Técnicos)
+  - Cliente (relación a tabla de Clientes)
+  - List<Problema> problemas
+  - boolean cerrado
+  - boolean esComplejo
+  + confirmarIncidente(): void
+  + notificarTécnico(): void
 }
 
 class Problema {
-    - ID Problema
-    - Descripción detallada del problema
-    - Tipo del problema (relación a tabla de TipoProblema)
-    - Incidente relacionado (relación a tabla de Incidente)
+  - ID Problema
+  - Fecha posible de resolución
+  - Colchón de horas estimadas
+  - Descripción detallada del problema
+  - Tipo del problema (relación a tabla de TipoProblema)
+  - Incidente relacionado (relación a tabla de Incidente)
 }
 
 class Servicio {
-    - ID del servicio
-    - Nombre del servicio
-    - Descripción del servicio
-    - Especialidad
+  - ID del servicio
+  - Nombre del servicio
+  - Descripción del servicio
+  - List<TipoProblema> TipoProblemas
 }
 
 class Especialidad {
-    - ID de la especialidad
-    - Nombre de la especialidad
+  - ID de la especialidad
+  - Nombre de la especialidad
 }
 
 class TipoProblema {
-    - ID del tipo de problema
-    - Nombre del tipo de problema
-    - Tiempo máximo de resolución
+  - ID del tipo de problema
+  - Nombre del tipo de problema
+  - Tiempo máximo de resolución
+  - List<Especialidad> especialidades
 }
 
 class Notificación {
-    - ID de la notificación
-    - Contenido de la notificación
-    - Técnico destinatario (relación a tabla de Técnicos)
-    - Fecha de envío
+  - ID de la notificación
+  - Titulo de la notificación
+  - Contenido de la notificación
+  - boolean enviado
+  - Incidente incidente
+
+  - Fecha de envío
+  - Persona destinatario
+
+
+  + enviar(): void
+}
+
+class EmailService {
+  + enviarCorreo(destinatario: String, asunto: String, contenido: String): void
+}
+
+class RankingTecnicos {
+  + obtenerTecnicoMasIncidentesResueltosUltimosDias(dias: int): Técnico
+  + obtenerTecnicoMasIncidentesEspecialidadUltimosDias(especialidad: Especialidad, dias: int): Técnico
+  + obtenerTecnicoMasRapido(): Técnico
 }
 
 Cliente --|> Servicio : contratarServicio()
 Cliente --|> Incidente : reportarIncidente()
 Técnico --|> Especialidad : asignarIncidente()
+TipoProblema --|> Especialidad : asignarIncidente()
 Técnico --|> Notificación : resolverIncidente()
 Cliente --|> Notificación : notificarTécnico()
 Incidente --|> Técnico : asignarIncidente()
 Incidente --|> Problema : confirmarIncidente()
 Problema --|> TipoProblema : confirmarIncidente()
-Operador --|> Incidente : registrarIncidente()
+Técnico --|> TiempoEstimadoTipoProblema : confirmarIncidente()
+TiempoEstimadoTipoProblema --|> TipoProblema : confirmarIncidente()
+Servicio --|> TipoProblema : confirmarIncidente()
+Incidente --|> EstadoIncidente
+Técnico --|> RankingTecnicos : asignarIncidente()
+
+Persona --|> Técnico : extiende
+Persona --|> Cliente : extiende
+
+EmailService --|> Notificación : enviar
 @enduml
