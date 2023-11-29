@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.DAO.IncidenteDAO;
+import org.example.model.EstadoIncidente;
 import org.example.model.Incidente;
 
 import javax.persistence.EntityManager;
@@ -35,5 +36,11 @@ public class IncidenteController {
         if (incidente != null) {
             incidenteDAO.delete(incidente);
         }
+    }
+    public void abrirIncidente(Incidente incidente) {
+
+        incidente.setEstado(EstadoIncidente.ABIERTO);
+        incidenteDAO.create(incidente);
+        System.out.println("Incidente abierto con éxito: " + incidente.getIdIncidente());
     }
 }

@@ -9,13 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import java.util.List;
 @Entity
 @Getter
 @Setter
@@ -24,14 +18,29 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "apellido")
     private String apellido;
+
+    @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
+
+    @Column(name = "telefono")
     private String telefono;
+
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "razon_social")
     private String razonSocial;
+
+    @Column(name = "cuit")
     private String cuit;
+
+    @Column(name = "contacto_principal")
     private String contactoPrincipal;
 
     @ManyToMany
@@ -47,7 +56,6 @@ public class Cliente implements Serializable {
     private List<Notificacion> notificaciones;
 
     public void contratarServicio(Servicio servicio) {
-
         if (serviciosContratados == null) {
             serviciosContratados = new ArrayList<>();
         }

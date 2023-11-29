@@ -1,3 +1,4 @@
+
 package org.example.model;
 
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class Especialidad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEspecialidad;
 
+    @Column(name = "nombre_especialidad")
     private String nombreEspecialidad;
 
     @ManyToMany

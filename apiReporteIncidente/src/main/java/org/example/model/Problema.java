@@ -1,3 +1,4 @@
+
 package org.example.model;
 
 import lombok.Getter;
@@ -26,6 +27,4 @@ public class Problema implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_incidente")
     private Incidente incidenteRelacionado;
-
-
 }

@@ -41,10 +41,7 @@ public class ClienteController {
     }
 
 
-    public void contratarServicio(Long clienteId, Long servicioId) {
-        Cliente cliente = clienteDAO.findOne(clienteId);
-        Servicio servicio = servicioController.obtenerServicio(servicioId);
-
+    public void contratarServicio(Cliente cliente, Servicio servicio) {
         if (cliente != null && servicio != null) {
             servicioController.contratarServicio(cliente, servicio);
             clienteDAO.update(cliente);

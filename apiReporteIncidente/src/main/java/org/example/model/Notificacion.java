@@ -30,10 +30,9 @@ public class Notificacion implements Serializable {
     @JoinColumn(name = "tecnico_id")
     private Tecnico tecnicoDestinatario;
 
-
     private Date fechaEnvio;
 
-    public void enviarCorreo(String destinatario, String asunto, String contenido)  {
-        EmailService.enviarCorreo(destinatario,asunto,contenido);
+    public void enviarCorreo(String destinatario, String asunto, String contenido) {
+        EmailService.enviarCorreo(destinatario, asunto, contenido);
     }
 }

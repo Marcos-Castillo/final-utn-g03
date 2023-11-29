@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 @Setter
 public class RankingTecnicosService implements Serializable {
 
-    @Id
-    private Long idRankingTecnicos;
+    private List<Incidente> incidentesResueltos;
 
-    @OneToMany(mappedBy = "tecnicoResuelve")
-    private List<Incidente> incidentesResueltos = new ArrayList<>();
+    public RankingTecnicosService(List<Incidente> incidentesResueltos){
+        this.incidentesResueltos = incidentesResueltos;
+    }
 
     public Tecnico obtenerTecnicoMasIncidentesResueltosUltimosDias(int dias) {
         return incidentesResueltos.stream()
@@ -59,9 +59,10 @@ public class RankingTecnicosService implements Serializable {
     }
 
     private Tecnico crearNuevoTecnico(String nombre) {
-        return Tecnico.builder()
-                .nombre(nombre)
-                // Puedes inicializar otros campos según tus necesidades
-                .build();
+        Tecnico tecnico = new Tecnico();
+
+        tecnico.setNombre(nombre);
+
+        return tecnico;
     }
 }

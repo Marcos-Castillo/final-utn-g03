@@ -1,4 +1,3 @@
-
 package org.example.model;
 
 import lombok.Getter;
@@ -17,7 +16,10 @@ public class Servicio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idServicio;
 
+    @Column(name = "nombre_servicio")
     private String nombreServicio;
+
+    @Column(name = "descripcion_servicio")
     private String descripcionServicio;
 
     @ManyToMany
@@ -31,6 +33,4 @@ public class Servicio implements Serializable {
             joinColumns = @JoinColumn(name = "id_servicio"),
             inverseJoinColumns = @JoinColumn(name = "id_tipo_problema"))
     private List<TipoProblema> tiposProblema;
-
-
 }

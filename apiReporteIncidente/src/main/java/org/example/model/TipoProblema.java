@@ -1,11 +1,12 @@
-package org.example.model;
 
+package org.example.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,7 +17,11 @@ public class TipoProblema implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTipoProblema;
+
+    @Column(name = "nombre_tipo_problema")
     private String nombreTipoProblema;
+
+    @Column(name = "tiempo_maximo_resolucion")
     private String tiempoMaximoResolucion;
 
     @ManyToMany
@@ -31,5 +36,10 @@ public class TipoProblema implements Serializable {
     @OneToMany(mappedBy = "tipoProblema")
     private List<Problema> problemas;
 
-
+    public void setEspecialidad(Especialidad especialidad) {
+        if (this.especialidades == null){
+            this.especialidades=new ArrayList<Especialidad>();
+        }
+        this.especialidades.add(especialidad);
+    }
 }
