@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.DAO.IncidenteDAO;
-import org.example.DAO.ServicioDAO;
 import org.example.DAO.TecnicoDAO;
 import org.example.model.Incidente;
 import org.example.model.Tecnico;

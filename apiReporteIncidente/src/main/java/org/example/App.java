@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class App {
 
@@ -32,6 +31,8 @@ public class App {
         EspecialidadController especialidadController = new EspecialidadController(entityManager);
         TipoProblemaController tipoProblemaController = new TipoProblemaController(entityManager);
 
+            System.out.println("#####################################");
+            System.out.println("Crea los datos para pruebas");
         Especialidad especialidad = new Especialidad();
         especialidad.setNombreEspecialidad("redes");
         especialidadController.crearEspecialidad(especialidad);
@@ -86,8 +87,9 @@ public class App {
 
         // Lógica para resolver el incidente
         tecnicoController.resolverIncidente(tecnico, incidente);
-
-        // Muestra los resultados del rankin
+            System.out.println("#####################################");
+            System.out.println("Muestra los resultados del ranking");
+        // Muestra los resultados del ranking
         RankingTecnicosService rankingService = new RankingTecnicosService(incidenteController.obtenerTodosLosIncidentes());
         // a. Quién fue el técnico con más incidentes resueltos en los últimos 5 días
         Tecnico tecnicoMasIncidentes = rankingService.obtenerTecnicoMasIncidentesResueltosUltimosDias(5);

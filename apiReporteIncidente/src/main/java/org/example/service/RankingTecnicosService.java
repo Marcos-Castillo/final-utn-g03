@@ -6,12 +6,8 @@ import org.example.model.Especialidad;
 import org.example.model.Incidente;
 import org.example.model.Tecnico;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;

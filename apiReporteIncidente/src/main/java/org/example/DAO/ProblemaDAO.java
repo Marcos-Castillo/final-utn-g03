@@ -1,7 +1,6 @@
 package org.example.DAO;
 
 import org.example.model.Problema;
-import org.example.model.Servicio;
 
 import javax.persistence.EntityManager;
 
